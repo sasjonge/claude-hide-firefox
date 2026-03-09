@@ -43,13 +43,9 @@ async function fetchProjectChats() {
 }
 
 // Hides/shows project chats based on configuration
-function hideProjectChats() {
-  if (!chrome?.storage?.sync) {
-    console.error('[Claude Hide Chats] chrome.storage is not available');
-    return;
-  }
-
-  chrome.storage.sync.get(['hideProjectChats'], function(result) {
+async function hideProjectChats() {
+  try {
+    const result = await browser.storage.sync.get('hideProjectChats');
     const isEnabled = result.hideProjectChats !== false;
     const chatLinks = document.querySelectorAll('a[href^="/chat/"]');
 
@@ -61,7 +57,9 @@ function hideProjectChats() {
         chatItem.style.display = isEnabled ? 'none' : '';
       }
     });
-  });
+  } catch (e) {
+    console.error('[Claude Hide Chats] storage error:', e);
+  }
 }
 
 // Intercepts future requests to update the list
@@ -114,8 +112,6 @@ if (document.readyState === 'loading') {
 }
 
 // Reapplies when settings change
-if (chrome?.storage?.onChanged) {
-  chrome.storage.onChanged.addListener((changes) => {
-    if (changes.hideProjectChats) hideProjectChats();
-  });
-}
+browser.storage.onChanged.addListener((changes) => {
+  if (changes.hideProjectChats) hideProjectChats();
+});

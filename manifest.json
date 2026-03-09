@@ -1,12 +1,16 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Claude Hide Chats",
   "version": "1.0",
   "description": "Hide chats that belong to projects in Claude's sidebar",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "claude-hide-chats@firefox-addon",
+      "strict_min_version": "109.0"
+    }
+  },
   "permissions": [
-    "storage"
-  ],
-  "host_permissions": [
+    "storage",
     "https://claude.ai/*"
   ],
   "content_scripts": [
@@ -16,7 +20,7 @@
       "run_at": "document_end"
     }
   ],
-  "action": {
+  "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icon.png",
