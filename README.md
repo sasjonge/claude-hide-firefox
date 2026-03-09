@@ -1,6 +1,6 @@
 # Claude Hide Chats
 
-A Chrome extension to hide project chats from Claude's sidebar.
+A Firefox addon to hide project chats from Claude's sidebar.
 
 ## Demo
 
@@ -17,10 +17,9 @@ A Chrome extension to hide project chats from Claude's sidebar.
 ## Installation
 
 1. Clone this repository
-2. Open `chrome://extensions/`
-3. Enable Developer mode
-4. Click "Load unpacked"
-5. Select the extension folder
+2. Open `about:debugging#/runtime/this-firefox`
+3. Click "Load Temporary Add-on..."
+4. Select the `manifest.json` file from the extension folder
 
 ## Usage
 
